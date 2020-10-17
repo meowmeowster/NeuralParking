@@ -1,0 +1,26 @@
+# Файл docker-compose должен начинаться с тега версии.
+# Мы используем "3" так как это - самая свежая версия на момент написания этого кода.
+
+version: "3"
+
+# Следует учитывать, что docker-composes работает с сервисами.
+# 1 сервис = 1 контейнер.
+# Сервисом может быть клиент, сервер, сервер баз данных...
+# Раздел, в котором будут описаны сервисы, начинается с 'services'.
+
+services:
+  server:
+    build: build/
+    ports:
+      - 5000:5000
+#    depends_on:
+#      - db
+#  db:
+#    image: store/oracle/database-enterprise:12.2.0.1
+#    restart: always
+#    ports:
+#      - 5432:5432
+#    volumes:
+#      - db:/u01/app/oracle
+#volumes:
+#  db:

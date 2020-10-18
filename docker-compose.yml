@@ -5,14 +5,18 @@ services:
     build: build/
     ports:
       - 5000:5000
-#    depends_on:
-#      - db
-#  db:
-#    image: store/oracle/database-enterprise:12.2.0.1
-#    restart: always
-#    ports:
-#      - 5432:5432
-#    volumes:
-#      - db:/u01/app/oracle
-#volumes:
-#  db:
+    depends_on:
+      - database
+  database:
+    image: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: hack
+
+volumes:
+    db-data:

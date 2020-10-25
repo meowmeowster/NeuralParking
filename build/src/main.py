@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, Response
 from predictor import predict
 from pydantic import BaseModel
 
@@ -12,7 +12,19 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return ''
+    data = """
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>Загрузка файла</title>
+ </head>
+ <body>
+тест
+ </body>
+</html>
+    """
+    return Response(content=data, media_type="application/xml")
 
 
 @app.post("/api/predict/")
